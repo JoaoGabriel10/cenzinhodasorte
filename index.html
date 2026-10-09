@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>100zinho da Sorte</title>
+<meta name="description" content="100zinho da Sorte — prêmios na conta, na hora. Escolha sua campanha e garanta seus números.">
+<meta name="theme-color" content="#080812">
+<meta property="og:title" content="100zinho da Sorte">
+<meta property="og:image" content="https://incs-bucket.s3.amazonaws.com/20261007_6ac6de54311fd.jpeg">
+<link rel="icon" href="https://incs-bucket.s3.amazonaws.com/20210518_60a4112b59747.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+/* Layout: mesma espinha da Família de Prêmios — header + carrossel de banners + COMPRAR + ganhadores em vídeo + banners extras + parceiro + FAQ + insta + rodapé; no mobile, barra de navegação fixa embaixo. Identidade 100zinho: azul-noite, azul royal, dourado do logo e verde do botão de compra. */
+:root{
+  --noite:#080812;        /* fundo do site oficial */
+  --noite-2:#0f1030;      /* superfícies */
+  --royal:#363e9b;        /* cor primária oficial */
+  --royal-claro:#5560d8;
+  --ouro:#ffc93c;         /* amarelo do logo/banners */
+  --ouro-escuro:#e09b12;
+  --verde:#1fae5b;        /* botão de compra */
+  --verde-escuro:#168a47;
+  --texto:#eceefe;
+  --texto-suave:#a9acd6;
+  --linha:rgba(140,150,255,.18);
+  --f-display:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --f-corpo:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --raio:18px;
+  --max:1200px;
+  --nav-h:76px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--noite);color:var(--texto);font-family:var(--f-corpo);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;line-height:1.08}
+.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:16px}
+:focus-visible{outline:3px solid var(--ouro);outline-offset:3px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* fundo com brilho royal, como nos banners */
+.ceu{position:relative;background:
+  radial-gradient(1200px 500px at 50% -10%, rgba(85,96,216,.45), transparent 60%),
+  linear-gradient(180deg,#14166a 0%, var(--noite) 520px);}
+
+/* ===== HEADER ===== */
+.topo{position:sticky;top:0;z-index:50;background:rgba(14,15,58,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--linha);padding-top:env(safe-area-inset-top,0px)}
+.topo .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:84px}
+.logo img{height:58px;width:auto}
+.menu{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.menu a{display:block;padding:10px 14px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;color:var(--texto-suave);transition:color .2s,background .2s}
+.menu a:hover,.menu a[aria-current]{color:#fff;background:rgba(85,96,216,.28)}
+.btn-titulos{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;background:var(--ouro);color:#1a1440;font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;box-shadow:0 6px 0 var(--ouro-escuro);transition:transform .15s}
+.btn-titulos:hover{transform:translateY(-2px)}
+.hamb{display:none;background:none;border:0;color:#fff;padding:8px;cursor:pointer}
+
+/* ===== HERO / CARROSSEL ===== */
+.hero{padding-block:28px 8px}
+.carrossel{position:relative;border-radius:var(--raio);overflow:hidden;aspect-ratio:16/9;max-width:100%;background:#000;box-shadow:0 30px 60px -20px rgba(0,0,0,.7),0 0 0 1px var(--linha)}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;display:block}
+.slide.ativo{opacity:1;z-index:1}
+.slide .fundo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(28px) brightness(.55);transform:scale(1.15)}
+.slide .arte{position:relative;width:100%;height:100%;object-fit:contain}
+.seta{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;border-radius:50%;border:0;background:rgba(8,8,18,.55);color:#fff;font-size:22px;cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(6px)}
+.seta:hover{background:var(--royal)}
+.seta.ant{left:14px}.seta.prox{right:14px}
+.pontos{position:absolute;left:0;right:0;bottom:14px;z-index:3;display:flex;justify-content:center;gap:8px}
+.pontos button{width:10px;height:10px;border-radius:999px;border:0;background:rgba(255,255,255,.45);cursor:pointer;padding:0;transition:width .3s,background .3s}
+.pontos button.ativo{width:30px;background:var(--ouro)}
+
+.compra{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding-block:30px 46px}
+.btn-comprar{display:inline-flex;align-items:center;justify-content:center;gap:12px;width:min(520px,100%);padding:22px 28px;border-radius:999px;background:linear-gradient(180deg,#2bd06f,var(--verde));color:#fff;font-family:var(--f-display);font-weight:900;font-size:clamp(22px,4vw,30px);letter-spacing:.04em;text-transform:uppercase;text-decoration:none;box-shadow:0 8px 0 var(--verde-escuro),0 18px 40px -10px rgba(31,174,91,.6);transition:transform .15s,box-shadow .15s;animation:pulso 2.4s ease-in-out infinite}
+.btn-comprar:hover{transform:translateY(-2px)}
+.btn-comprar:active{transform:translateY(4px);box-shadow:0 4px 0 var(--verde-escuro)}
+@keyframes pulso{0%,100%{filter:brightness(1)}50%{filter:brightness(1.12)}}
+.sorteio{font-family:var(--f-display);font-weight:800;font-size:clamp(20px,3.2vw,26px)}
+.sorteio span{color:var(--ouro)}
+.sub{color:var(--texto-suave);font-weight:600;font-size:15px;margin:0}
+.link-reg{color:var(--texto-suave);font-size:14px}
+
+/* ===== TÍTULOS DE SEÇÃO ===== */
+.secao{padding-block:64px}
+.titulo{text-align:center;margin-bottom:34px}
+.titulo .eyebrow{display:inline-block;font-weight:800;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ouro);margin-bottom:10px}
+.titulo h2{font-weight:900;font-style:italic;font-size:clamp(30px,5vw,48px);text-transform:uppercase}
+.titulo p{color:var(--texto-suave);margin:10px auto 0;max-width:56ch}
+
+/* ===== GANHADORES (vídeos) ===== */
+.ganhadores{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.ganhador{display:flex;flex-direction:column;gap:14px;min-width:0}
+.ganhador .quem{text-align:center}
+.ganhador .quem small{display:block;font-weight:800;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--texto-suave)}
+.ganhador .valor{display:block;font-family:var(--f-display);font-weight:900;font-style:italic;font-size:clamp(28px,3.4vw,38px);background:linear-gradient(180deg,#fff3b8 0%,var(--ouro) 45%,var(--ouro-escuro) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
+.ganhador .onde{font-size:13px;color:var(--texto-suave);font-weight:600}
+.video{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 0 0 1px var(--linha),0 20px 40px -18px rgba(0,0,0,.8)}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.capa{position:absolute;inset:0;width:100%;height:100%;border:0;padding:0;cursor:pointer;display:grid;place-items:center;color:#fff;font:inherit;
+  background:
+    radial-gradient(circle at 50% 120%, rgba(255,201,60,.35), transparent 55%),
+    radial-gradient(circle at 15% 10%, rgba(85,96,216,.65), transparent 50%),
+    linear-gradient(135deg,#1b1f7a,#0b0c2c 70%)}
+.capa img.thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.capa .marca{position:absolute;left:14px;top:12px;height:30px;width:auto;opacity:.95}
+.capa .rotulo{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.play{position:relative;width:76px;height:54px;border-radius:14px;background:#ff0033;display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.45);transition:transform .2s}
+.play::after{content:"";border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:4px}
+.capa:hover .play{transform:scale(1.08)}
+.capa.sem-video{cursor:default}
+.capa.sem-video .play{background:rgba(255,255,255,.18)}
+
+/* ===== BANNERS EXTRAS ===== */
+.extras{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.extras a{display:block;border-radius:var(--raio);overflow:hidden;box-shadow:0 0 0 1px var(--linha);transition:transform .25s}
+.extras a:hover{transform:translateY(-4px)}
+.extras img{width:100%;aspect-ratio:16/9;object-fit:cover}
+
+/* ===== PARCEIRO ===== */
+.parceiro{border-radius:24px;padding:48px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px;
+  background:radial-gradient(600px 240px at 50% 0%, rgba(255,201,60,.22), transparent 70%),linear-gradient(135deg,var(--royal),#1a1d62);box-shadow:0 0 0 1px var(--linha)}
+.parceiro h2{font-weight:900;font-style:italic;font-size:clamp(28px,4.6vw,44px);text-transform:uppercase}
+.parceiro h2 em{display:block;font-style:italic;color:var(--ouro)}
+.parceiro p{margin:0;color:#d7daf8;max-width:52ch}
+.btn-ouro{display:inline-flex;padding:16px 34px;border-radius:999px;background:var(--ouro);color:#1a1440;font-weight:900;font-size:16px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;box-shadow:0 6px 0 var(--ouro-escuro);transition:transform .15s}
+.btn-ouro:hover{transform:translateY(-2px)}
+
+/* ===== FAQ ===== */
+.faq{max-width:820px;margin-inline:auto;display:flex;flex-direction:column;gap:12px}
+.faq details{background:var(--noite-2);border:1px solid var(--linha);border-radius:14px;overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;padding:20px 56px 20px 22px;font-weight:800;font-size:17px;text-transform:uppercase;letter-spacing:.02em;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:var(--royal);display:grid;place-items:center;font-size:20px;line-height:1;transition:transform .2s}
+.faq details[open] summary::after{content:"–";background:var(--ouro);color:#1a1440}
+.faq details p{margin:0;padding:0 22px 20px;color:var(--texto-suave)}
+.faq details p a{color:var(--ouro);font-weight:700}
+
+/* ===== INSTAGRAM ===== */
+.insta{display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
+.insta h2{font-weight:900;font-style:italic;font-size:clamp(30px,5vw,48px);text-transform:uppercase}
+.insta h2 span{background:linear-gradient(90deg,#feda75,#fa7e1e,#d62976,#962fbf);-webkit-background-clip:text;background-clip:text;color:transparent}
+.insta .perfil{display:flex;align-items:center;gap:16px;padding:16px 20px;border-radius:999px;background:var(--noite-2);border:1px solid var(--linha);text-decoration:none;max-width:100%}
+.insta .perfil img{width:56px;height:56px;border-radius:50%;background:#fff;object-fit:contain;flex-shrink:0}
+.insta .perfil strong{display:block;font-size:17px}
+.insta .perfil small{color:var(--texto-suave)}
+.btn-insta{display:inline-flex;align-items:center;gap:10px;padding:15px 34px;border-radius:999px;background:linear-gradient(90deg,#fa7e1e,#d62976,#962fbf);color:#fff;font-weight:900;letter-spacing:.08em;text-transform:uppercase;text-decoration:none}
+
+/* ===== RODAPÉ ===== */
+.rodape{background:#05050d;border-top:1px solid var(--linha);padding-block:48px 32px}
+.rod-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+.rod-grid h4{margin:0 0 14px;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--ouro)}
+.rod-grid ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.rod-grid a{text-decoration:none;color:var(--texto-suave)}
+.rod-grid a:hover{color:#fff}
+.rod-marca img{height:64px;width:auto;margin-bottom:14px}
+.rod-marca p{color:var(--texto-suave);margin:0;max-width:36ch}
+.selos{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:32px;padding-top:24px;border-top:1px solid var(--linha)}
+.selos img{height:34px;width:auto}
+.selos .mais18{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;border:2px solid var(--ouro);color:var(--ouro);font-weight:900;font-size:14px}
+.legal{margin-top:20px;font-size:12px;line-height:1.6;color:#7c80ad;max-width:none}
+.copy{margin-top:16px;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--texto-suave)}
+
+/* ===== MENU LATERAL (mobile "Mais") ===== */
+.gaveta{position:fixed;inset:0;z-index:80;display:flex;justify-content:flex-start}
+.gaveta[hidden]{display:none}
+.gaveta .veu{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.gaveta nav{position:relative;width:min(320px,86vw);height:100%;background:var(--noite-2);padding:calc(24px + env(safe-area-inset-top,0px)) 20px 24px;display:flex;flex-direction:column;gap:6px;overflow-y:auto;box-shadow:20px 0 40px rgba(0,0,0,.5)}
+.gaveta nav img{height:52px;width:auto;margin-bottom:18px}
+.gaveta nav a{padding:14px 12px;border-radius:12px;text-decoration:none;font-weight:700}
+.gaveta nav a:hover{background:rgba(85,96,216,.25)}
+.gaveta .fechar{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:14px;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}
+
+/* ===== BARRA INFERIOR (mobile, igual Família de Prêmios) ===== */
+.barra{display:none}
+
+
+/* ===== PRÓXIMO SORTEIO (faixa de contagem, estilo Baú do Milhão) ===== */
+.contagem{background:linear-gradient(90deg,var(--ouro-escuro),var(--ouro) 30%,var(--ouro) 70%,var(--ouro-escuro));color:#1a1440;border-bottom:1px solid rgba(0,0,0,.15)}
+.contagem .wrap{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;padding-block:10px}
+.contagem .rot{font-weight:900;font-size:15px;letter-spacing:.06em;text-transform:uppercase}
+.relogio{display:flex;align-items:flex-start;gap:6px;font-variant-numeric:tabular-nums}
+.relogio .u{display:flex;flex-direction:column;align-items:center;min-width:46px}
+.relogio b{font-family:var(--f-display);font-weight:900;font-size:28px;line-height:1;background:#1a1440;color:var(--ouro);padding:6px 8px;border-radius:8px;min-width:46px;text-align:center}
+.relogio small{font-size:10px;font-weight:800;letter-spacing:.1em;margin-top:4px}
+.relogio i{font-style:normal;font-weight:900;font-size:24px;line-height:38px}
+.contagem .ir{font-weight:900;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--verde);padding:9px 18px;border-radius:999px;text-decoration:none;box-shadow:0 3px 0 var(--verde-escuro)}
+
+/* ===== EM NÚMEROS (prêmios pagos, efeito contador) ===== */
+.numeros{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.num{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:30px 16px;border-radius:20px;background:linear-gradient(180deg,#16185a,var(--noite-2));border:1px solid var(--linha);transition:transform .25s,border-color .25s,box-shadow .25s}
+.num:hover{transform:translateY(-4px);border-color:var(--ouro);box-shadow:0 18px 40px -18px rgba(255,201,60,.45)}
+.num .ico{width:60px;height:60px;border-radius:50%;background:var(--ouro);color:#1a1440;display:grid;place-items:center;transition:transform .25s}
+.num:hover .ico{transform:scale(1.08)}
+.num .ico svg{width:28px;height:28px}
+.num .v{font-family:var(--f-display);font-weight:900;font-size:clamp(26px,3vw,38px);line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.num .v.din{font-size:clamp(20px,2.3vw,30px)}
+.num .v.din small{display:block;font-size:.55em;color:var(--ouro);margin-bottom:4px}
+section[id]{scroll-margin-top:96px}
+.num .l{font-size:14px;font-weight:700;color:var(--texto-suave);line-height:1.3}
+.num.destaque{background:radial-gradient(240px 140px at 50% 0%,rgba(255,201,60,.28),transparent 70%),linear-gradient(180deg,var(--royal),#1a1d62);border-color:rgba(255,201,60,.55)}
+.num.destaque .v{color:var(--ouro)}
+.acoes-num{display:flex;justify-content:center;margin-top:28px}
+.btn-azul{display:inline-flex;padding:14px 30px;border-radius:999px;background:var(--royal);color:#fff;font-weight:900;text-decoration:none;letter-spacing:.04em;box-shadow:0 0 0 1px var(--linha)}
+.btn-azul:hover{background:var(--royal-claro)}
+
+/* ===== POPUP DE ENTRADA ===== */
+.pop{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:16px}
+.pop[hidden]{display:none}
+.pop .veu{position:absolute;inset:0;background:rgba(4,4,14,.78);backdrop-filter:blur(4px);animation:fade .3s ease}
+.pop .caixa{position:relative;width:min(440px,100%);max-height:calc(100% - 16px);overflow-y:auto;border-radius:22px;background:linear-gradient(180deg,#1b1f7a,var(--noite-2) 60%);border:2px solid var(--ouro);box-shadow:0 30px 80px rgba(0,0,0,.7);animation:sobe .45s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes fade{from{opacity:0}}
+@keyframes sobe{from{opacity:0;transform:translateY(30px) scale(.95)}}
+.pop .x{position:absolute;top:10px;right:10px;z-index:2;width:36px;height:36px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:22px;cursor:pointer;line-height:1}
+.pop .faixa{display:flex;align-items:center;justify-content:center;gap:8px;background:#e5243b;color:#fff;font-weight:900;font-size:13px;letter-spacing:.1em;text-transform:uppercase;padding:9px 12px}
+.pop .faixa .luz{width:9px;height:9px;border-radius:50%;background:#fff;animation:pisca 1s infinite}
+@keyframes pisca{50%{opacity:.2}}
+.pop .arte{width:100%;aspect-ratio:1500/950;object-fit:cover;background:#000}
+.pop .corpo{padding:20px 22px 24px;display:flex;flex-direction:column;gap:14px;text-align:center}
+.pop h3{font-weight:900;font-style:italic;font-size:28px;text-transform:uppercase;line-height:1.05}
+.pop h3 span{color:var(--ouro)}
+.pop .corpo>p{margin:0;color:var(--texto-suave);font-weight:600}
+.pop .barra-v{height:16px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
+.pop .barra-v span{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--ouro),#ff7a1a,#e5243b);transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.pop .info-v{display:flex;justify-content:space-between;font-size:13px;font-weight:800;margin-top:-6px}
+.pop .info-v b{color:var(--ouro)}
+.pop .relogio{justify-content:center}
+.pop .relogio b{background:var(--ouro);color:#1a1440}
+.pop .relogio small{color:var(--texto-suave)}
+.pop .relogio i{color:var(--ouro)}
+.pop .btn-comprar{width:100%;font-size:20px;padding:18px 20px}
+.pop .depois{background:none;border:0;color:var(--texto-suave);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer}
+
+
+/* ===== +20 GANHADORES TODOS OS DIAS (sem bloco, direto no fundo) ===== */
+.diario{display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center}
+.diario .linha{display:flex;align-items:center;justify-content:center;gap:clamp(16px,3vw,32px);width:100%}
+.diario .linha::before,.diario .linha::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(255,201,60,.55))}
+.diario .linha::after{background:linear-gradient(270deg,transparent,rgba(255,201,60,.55))}
+.diario .grande{font-family:var(--f-display);font-weight:900;font-style:italic;font-size:clamp(84px,13vw,150px);line-height:.85;letter-spacing:-.03em;background:linear-gradient(180deg,#fff3b8 0%,var(--ouro) 45%,var(--ouro-escuro) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.08em}
+.diario h2{font-weight:900;font-style:italic;font-size:clamp(26px,4.2vw,44px);text-transform:uppercase}
+.diario h2 em{font-style:italic;color:var(--ouro)}
+.diario .sub-d{margin:-14px 0 0;color:var(--texto-suave);font-weight:600}
+.esteira{width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.esteira ul{display:flex;list-style:none;margin:0;padding:0;width:max-content;animation:rola 36s linear infinite}
+.esteira:hover ul{animation-play-state:paused}
+.esteira li{display:flex;align-items:baseline;gap:8px;white-space:nowrap;font-size:15px;font-weight:600;color:var(--texto-suave);padding-inline:22px;position:relative}
+.esteira li::after{content:"";position:absolute;right:-3px;top:50%;width:6px;height:6px;border-radius:50%;background:var(--ouro);opacity:.6;transform:translateY(-50%)}
+.esteira li strong{color:var(--texto);font-weight:800}
+.esteira li b{color:var(--ouro);font-weight:900}
+@keyframes rola{to{transform:translateX(-50%)}}
+
+/* ===== BOTÃO WHATSAPP (flutuante) ===== */
+.zap{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:70;width:62px;height:62px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 10px 28px rgba(0,0,0,.45);transition:transform .2s}
+.zap:hover{transform:scale(1.08)}
+.zap svg{width:34px;height:34px}
+.zap::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25d366;animation:onda 2s ease-out infinite}
+@keyframes onda{to{transform:scale(1.6);opacity:0}}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width:1024px){
+  .menu{display:none}
+  .hamb{display:block}
+  .topo .wrap{min-height:72px}
+  .logo{position:absolute;left:50%;transform:translateX(-50%)}
+  .logo img{height:50px}
+  .btn-titulos{padding:10px 14px;font-size:12px}
+}
+@media (max-width:820px){
+  body{padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px))}
+  .topo .btn-titulos{display:none}
+  .topo .wrap{justify-content:flex-start}
+  .hero{padding-block:16px 0}
+  .carrossel{aspect-ratio:1080/731;border-radius:14px}
+  .seta{display:none}
+  .secao{padding-block:48px}
+  .ganhadores{grid-template-columns:minmax(0,1fr);gap:36px}
+  .extras{grid-template-columns:minmax(0,1fr)}
+  .rod-grid{grid-template-columns:minmax(0,1fr)}
+  .numeros{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .zap{bottom:calc(var(--nav-h) + 16px + env(safe-area-inset-bottom,0px));right:14px;width:56px;height:56px}
+  .zap svg{width:30px;height:30px}
+  .esteira li{font-size:14px;padding-inline:16px}
+  .num{padding:22px 10px}
+  .num .v.din{font-size:22px}
+  .contagem .wrap{gap:8px 14px}
+  .contagem .rot{font-size:12px;width:100%;text-align:center}
+  .contagem .ir{display:none}
+  .relogio .u{min-width:40px}
+  .relogio b{font-size:22px;min-width:40px;padding:5px 6px}
+  .relogio i{font-size:20px;line-height:32px}
+  .barra{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:60;min-height:var(--nav-h);padding-bottom:env(safe-area-inset-bottom,0px);
+    background:linear-gradient(180deg,var(--royal-claro),var(--royal));border-top:2px solid var(--ouro);box-shadow:0 -10px 30px rgba(0,0,0,.45)}
+  .barra a,.barra button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:none;border:0;color:#fff;text-decoration:none;font:inherit;font-weight:700;font-size:11px;cursor:pointer;padding:8px 2px}
+  .barra svg{width:28px;height:28px}
+  .barra .central{position:relative}
+  .barra .central .bola{width:58px;height:58px;margin-top:-30px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg,#2bd06f,var(--verde));border:3px solid var(--ouro);box-shadow:0 8px 18px rgba(0,0,0,.45)}
+  .barra .central .bola svg{width:30px;height:30px}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="topo">
+  <div class="wrap">
+    <button class="hamb" id="abrirMenu" aria-label="Abrir menu">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h11M4 17h16"/></svg>
+    </button>
+    <a class="logo" href="https://www.100zinhodasorte.me/" aria-label="100zinho da Sorte — início">
+      <img src="https://incs-bucket.s3.amazonaws.com/20210308_60462ed7bfd0c.png" alt="100zinho da Sorte" width="274" height="100">
+    </a>
+    <nav aria-label="Menu principal">
+      <ul class="menu">
+        <li><a href="#" aria-current="page">Início</a></li>
+        <li><a href="https://www.100zinhodasorte.me/campanhas">Campanhas</a></li>
+        <li><a href="#ganhadores">Ganhadores</a></li>
+        <li><a href="https://www.100zinhodasorte.me/comunicados">Avisos oficiais</a></li>
+        <li><a href="https://www.100zinhodasorte.me/termos-de-uso">Regulamento</a></li>
+        <li><a href="https://www.100zinhodasorte.me/contato">Fale Conosco</a></li>
+      </ul>
+    </nav>
+    <a class="btn-titulos" href="https://www.100zinhodasorte.me/meus-numeros">Meus títulos</a>
+  </div>
+</header>
+
+<!-- ================= PRÓXIMO SORTEIO (contagem) ================= -->
+<div class="contagem" role="region" aria-label="Próximo sorteio">
+  <div class="wrap">
+    <span class="rot">Próximo sorteio em</span>
+    <div class="relogio" data-relogio aria-label="Tempo até o próximo sorteio"><span class="u"><b data-d>00</b><small>DIAS</small></span><i>:</i><span class="u"><b data-h>00</b><small>HORAS</small></span><i>:</i><span class="u"><b data-m>00</b><small>MIN</small></span><i>:</i><span class="u"><b data-s>00</b><small>SEG</small></span></div>
+    <a class="ir" href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">Comprar</a>
+  </div>
+</div>
+
+<main>
+<div class="ceu">
+
+  <!-- ================= BANNERS (carrossel) ================= -->
+  <section class="hero" aria-label="Campanhas em destaque">
+    <div class="wrap">
+      <div class="carrossel" id="carrossel">
+        <a class="slide ativo" href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">
+          <img class="fundo" src="https://incs-bucket.s3.amazonaws.com/20261007_6ac6de54311fd.jpeg" alt="" aria-hidden="true">
+          <img class="arte" src="https://incs-bucket.s3.amazonaws.com/20261007_6ac6de54311fd.jpeg" alt="R$ 120.000,00 — sendo R$ 60.000,00 pela Loteria Federal e R$ 60.000,00 em cotas premiadas. 211ª edição.">
+        </a>
+        <a class="slide" href="https://www.100zinhodasorte.me/campanhas">
+          <img class="fundo" src="https://incs-bucket.s3.amazonaws.com/20261007_6ac6c8e365645.jpeg" alt="" aria-hidden="true">
+          <img class="arte" src="https://incs-bucket.s3.amazonaws.com/20261007_6ac6c8e365645.jpeg" alt="R$ 3.400,00 na conta, na hora — dezenas de 0 a 99." loading="lazy">
+        </a>
+        <a class="slide" href="https://www.100zinhodasorte.me/campanhas">
+          <img class="fundo" src="https://incs-bucket.s3.amazonaws.com/20261007_6ac70241a9c25.jpeg" alt="" aria-hidden="true">
+          <img class="arte" src="https://incs-bucket.s3.amazonaws.com/20261007_6ac70241a9c25.jpeg" alt="R$ 500,00 na conta, na hora — dezenas de 0 a 99, por R$ 9,00 a unidade." loading="lazy">
+        </a>
+        <button class="seta ant" type="button" aria-label="Banner anterior">‹</button>
+        <button class="seta prox" type="button" aria-label="Próximo banner">›</button>
+        <div class="pontos" role="tablist" aria-label="Escolher banner"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMPRAR ================= -->
+  <section class="compra wrap" aria-label="Comprar">
+    <a class="btn-comprar" href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2.2a2.8 2.8 0 0 0 0 5.6V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2.2a2.8 2.8 0 0 0 0-5.6V7Zm11 1v2h2V8h-2Zm0 3v2h2v-2h-2Zm0 3v2h2v-2h-2Z"/></svg>
+      Comprar
+    </a>
+    <!-- EDITAR: data/hora do sorteio da campanha principal -->
+    <p class="sorteio">R$ 120.000,00 · <span>211ª edição</span></p>
+    <p class="sub">Sorteio pela Loteria Federal · pagamento via PIX</p>
+    <a class="link-reg" href="https://www.100zinhodasorte.me/termos-de-uso">Regulamento</a>
+  </section>
+</div>
+
+
+<!-- ================= EM NÚMEROS (prêmios pagos) =================
+  EDITAR: troque os valores em data-alvo (só números, sem pontos).
+  data-prefixo / data-sufixo controlam "R$ " e "+" etc.
+-->
+<section class="secao" id="numeros" aria-labelledby="t-numeros">
+  <div class="wrap">
+    <div class="titulo">
+      <span class="eyebrow">Prêmios de verdade, pagos a gente de verdade</span>
+      <h2 id="t-numeros">O 100zinho em números</h2>
+    </div>
+    <div class="numeros">
+      <div class="num destaque"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2V2Zm12 8H5v9h14v-9Z"/></svg></span><span class="v" data-alvo="8" data-sufixo=" anos">8 anos</span><span class="l">no mercado</span></div>
+      <div class="num"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.3A5 5 0 0 1 13 14.9V17h3v4H8v-4h3v-2.1A5 5 0 0 1 8.3 12H8a4 4 0 0 1-4-4V5h3V3Zm0 4H6v1a2 2 0 0 0 1 1.7V7Zm10 0v2.7A2 2 0 0 0 18 8V7h-1Z"/></svg></span><span class="v" data-alvo="10000" data-prefixo="+">+10.000</span><span class="l">Sorteios realizados</span></div>
+      <div class="num"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M1 20a8 8 0 0 1 16 0v1H1v-1Z"/><circle cx="17.5" cy="8.5" r="3"/><path d="M18.5 13.2A6.5 6.5 0 0 1 23 19.5V21h-4v-1a9.9 9.9 0 0 0-.5-6.8Z"/></svg></span><span class="v" data-alvo="50000" data-prefixo="+">+50.000</span><span class="l">Ganhadores</span></div>
+      <div class="num"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 2h6l-1.5 3h-3L9 2Zm1.2 4h3.6C18 8.5 21 13 21 16.5 21 19.5 18.8 22 12 22S3 19.5 3 16.5C3 13 6 8.5 10.2 6Zm2.6 4h-1.6v1.1c-1.2.3-2 1.1-2 2.2 0 1.4 1.2 1.9 2.4 2.2 1 .2 1.4.4 1.4.8s-.5.7-1.2.7c-.8 0-1.6-.3-2.2-.8l-.8 1.3c.6.5 1.5.9 2.4 1V20h1.6v-1.3c1.3-.3 2.1-1.1 2.1-2.3 0-1.5-1.2-2-2.5-2.3-.9-.2-1.3-.4-1.3-.7s.4-.6 1-.6c.6 0 1.3.2 1.8.6l.8-1.3a4 4 0 0 0-1.9-.8V10Z"/></svg></span><span class="v din"><small>R$</small><span data-alvo="10000000">10.000.000</span></span><span class="l">Distribuídos em prêmios</span></div>
+    </div>
+    <div class="acoes-num"><a class="btn-azul" href="https://www.100zinhodasorte.me/ganhadores">Ver todos os ganhadores</a></div>
+  </div>
+</section>
+
+<!-- ================= +20 GANHADORES TODOS OS DIAS =================
+  EDITAR: a esteira usa ganhadores reais da página /ganhadores. Atualize os nomes quando quiser.
+-->
+<section class="secao" style="padding-top:8px" aria-labelledby="t-diario">
+  <div class="wrap diario">
+    <div class="linha"><span class="grande" aria-hidden="true">+20</span></div>
+    <h2 id="t-diario">Ganhadores <em>todos os dias</em></h2>
+    <p class="sub-d">São mais de 20 prêmios pagos por dia, na conta e na hora.</p>
+    <div class="esteira" aria-label="Últimos ganhadores">
+      <ul><li><strong>Israel Brito</strong> ganhou <b>R$ 5.000,00</b> · São Paulo</li><li><strong>Adalberto Gomes</strong> ganhou <b>R$ 800,00</b> · Ceará</li><li><strong>João Tiburt</strong> ganhou <b>R$ 500,00</b> · São Paulo</li><li><strong>Chiara Rodrigues</strong> ganhou <b>R$ 1.500,00</b> · Minas Gerais</li><li><strong>Felipe Silva</strong> ganhou <b>R$ 500,00</b> · Pernambuco</li><li aria-hidden="true"><strong>Israel Brito</strong> ganhou <b>R$ 5.000,00</b> · São Paulo</li><li aria-hidden="true"><strong>Adalberto Gomes</strong> ganhou <b>R$ 800,00</b> · Ceará</li><li aria-hidden="true"><strong>João Tiburt</strong> ganhou <b>R$ 500,00</b> · São Paulo</li><li aria-hidden="true"><strong>Chiara Rodrigues</strong> ganhou <b>R$ 1.500,00</b> · Minas Gerais</li><li aria-hidden="true"><strong>Felipe Silva</strong> ganhou <b>R$ 500,00</b> · Pernambuco</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GANHADORES ================= -->
+<!--
+  COMO ADICIONAR O VÍDEO: coloque o ID do YouTube em data-youtube.
+  Ex.: https://www.youtube.com/watch?v=KNU53pj0s5g  ->  data-youtube="KNU53pj0s5g"
+  Com o ID preenchido, a capa vira a miniatura do vídeo e o play abre o player.
+-->
+<section class="secao" id="ganhadores" aria-labelledby="t-ganhadores">
+  <div class="wrap">
+    <div class="titulo">
+      <span class="eyebrow">Pessoas reais, prêmios reais</span>
+      <h2 id="t-ganhadores">Ganhadores</h2>
+    </div>
+    <div class="ganhadores">
+      <article class="ganhador">
+        <div class="quem">
+          <small>Ele ganhou</small>
+          <span class="valor">R$ 5.000,00!</span>
+          <span class="onde">Israel Brito · São Paulo</span>
+        </div>
+        <div class="video" data-youtube=""></div>
+      </article>
+      <article class="ganhador">
+        <div class="quem">
+          <small>Ela ganhou</small>
+          <span class="valor">R$ 1.500,00!</span>
+          <span class="onde">Chiara Rodrigues · Minas Gerais</span>
+        </div>
+        <div class="video" data-youtube=""></div>
+      </article>
+      <article class="ganhador">
+        <div class="quem">
+          <small>Ele ganhou</small>
+          <span class="valor">R$ 800,00!</span>
+          <span class="onde">Adalberto Gomes · Ceará</span>
+        </div>
+        <div class="video" data-youtube=""></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BANNERS EXTRAS ================= -->
+<section class="secao" style="padding-top:0" aria-label="Mais campanhas">
+  <div class="wrap extras">
+    <a href="https://www.100zinhodasorte.me/campanhas"><img src="https://incs-bucket.s3.amazonaws.com/20261007_6ac6c8e365645.jpeg" alt="R$ 3.400,00 na conta, na hora" loading="lazy"></a>
+    <a href="https://www.100zinhodasorte.me/campanhas"><img src="https://incs-bucket.s3.amazonaws.com/20261007_6ac70241a9c25.jpeg" alt="R$ 500,00 na conta, na hora" loading="lazy"></a>
+  </div>
+</section>
+
+<!-- ================= PARCEIRO ================= -->
+<section class="secao" style="padding-top:0" aria-label="Seja um parceiro">
+  <div class="wrap">
+    <div class="parceiro">
+      <h2>Seja um parceiro <em>100zinho da Sorte</em></h2>
+      <p>Divulgue nossas campanhas e cresça junto com a gente. Fale com a equipe e saiba como começar.</p>
+      <a class="btn-ouro" href="https://www.100zinhodasorte.me/contato">Comece agora</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="secao" style="padding-top:0" aria-labelledby="t-faq">
+  <div class="wrap">
+    <div class="titulo">
+      <h2 id="t-faq">O 100zinho da Sorte é seguro?</h2>
+      <p>Dúvida? Estamos aqui para ajudar.</p>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>Quem pode participar?</summary>
+        <p>Qualquer pessoa física, maior de 18 anos, que aceite os Termos de Uso. Vendemos para todo o Brasil.</p>
+      </details>
+      <details>
+        <summary>Como são feitos os sorteios?</summary>
+        <p>Cada campanha informa a extração usada no resultado, como a Loteria Federal, além da data e do horário do sorteio. Confira os detalhes na página da campanha antes de comprar.</p>
+      </details>
+      <details>
+        <summary>Quais são as formas de pagamento?</summary>
+        <p>Você paga seus números via PIX (cópia e cola ou QR Code) e a baixa acontece na hora.</p>
+      </details>
+      <details>
+        <summary>Como recebo meu prêmio?</summary>
+        <p>O prêmio é pago na conta do ganhador. Acompanhe seus números e resultados em <a href="https://www.100zinhodasorte.me/meus-numeros">Meus títulos</a>.</p>
+      </details>
+      <details>
+        <summary>Tem outras dúvidas?</summary>
+        <p>Fique tranquilo! Fale com nossa equipe pelo <a href="https://www.100zinhodasorte.me/contato">Suporte</a>.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INSTAGRAM ================= -->
+<section class="secao" style="padding-top:0" aria-label="Instagram">
+  <div class="wrap insta">
+    <h2>Segue lá no <span>Insta!</span></h2>
+    <a class="perfil" href="https://www.instagram.com/cenzinhodasorte" target="_blank" rel="noopener">
+      <img src="https://incs-bucket.s3.amazonaws.com/20210518_60a4112b59747.png" alt="" width="56" height="56">
+      <span style="text-align:left"><strong>@cenzinhodasorte</strong><small>Resultados, ganhadores e novidades</small></span>
+    </a>
+    <a class="btn-insta" href="https://www.instagram.com/cenzinhodasorte" target="_blank" rel="noopener">Seguir</a>
+  </div>
+</section>
+</main>
+
+<!-- ================= RODAPÉ ================= -->
+<footer class="rodape">
+  <div class="wrap">
+    <div class="rod-grid">
+      <div class="rod-marca">
+        <img src="https://incs-bucket.s3.amazonaws.com/20210308_60462ed7bfd0c.png" alt="100zinho da Sorte" width="274" height="100">
+        <p>Prêmios na conta, na hora. Escolha sua sorte!</p>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="https://www.100zinhodasorte.me/contato">Suporte</a></li>
+          <li><a href="https://www.instagram.com/cenzinhodasorte" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.100zinhodasorte.me/comunicados">Avisos oficiais</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sobre nós</h4>
+        <ul>
+          <li><a href="https://www.100zinhodasorte.me/termos-de-uso">Termos de uso</a></li>
+          <li><a href="https://www.100zinhodasorte.me/politica-privacidade">Política de privacidade</a></li>
+          <li><a href="https://www.100zinhodasorte.me/politica-de-cookies">Política de cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="selos">
+      <span class="mais18" title="Proibido para menores de 18 anos">18+</span>
+      <img src="https://incs-bucket.s3.us-east-1.amazonaws.com/assets/google-report.png" alt="Google Safe Browsing">
+    </div>
+    <!-- EDITAR: texto legal / regulamentação da operação (a Família de Prêmios usa este espaço para o texto da VIACAP) -->
+    <p class="legal">Participação permitida apenas para maiores de 18 anos. Antes de participar, leia o regulamento e os termos de uso. Confira o resultado dos sorteios e as condições de participação em www.100zinhodasorte.me.</p>
+    <p class="copy">2026 · 100zinho da Sorte © — Todos os direitos reservados</p>
+  </div>
+</footer>
+
+<!-- ================= MENU "MAIS" (mobile) ================= -->
+<div class="gaveta" id="gaveta" hidden>
+  <div class="veu" data-fechar></div>
+  <nav aria-label="Menu">
+    <button class="fechar" data-fechar aria-label="Fechar menu">×</button>
+    <img src="https://incs-bucket.s3.amazonaws.com/20210308_60462ed7bfd0c.png" alt="100zinho da Sorte">
+    <a href="#" data-fechar>Início</a>
+    <a href="https://www.100zinhodasorte.me/campanhas">Campanhas</a>
+    <a href="https://www.100zinhodasorte.me/meus-numeros">Meus títulos</a>
+    <a href="#ganhadores" data-fechar>Ganhadores</a>
+    <a href="https://www.100zinhodasorte.me/comunicados">Avisos oficiais</a>
+    <a href="https://www.100zinhodasorte.me/termos-de-uso">Regulamento</a>
+    <a href="https://www.100zinhodasorte.me/contato">Fale Conosco</a>
+    <a href="https://www.instagram.com/cenzinhodasorte" target="_blank" rel="noopener">Instagram</a>
+  </nav>
+</div>
+
+
+<!-- ================= POPUP DE ENTRADA =================
+  EDITAR: percentual vendido em data-vendido (0 a 100) e o texto abaixo.
+  Aparece 1 vez por sessão, 1,2 s depois de abrir a página.
+-->
+<div class="pop" id="popup" hidden role="dialog" aria-modal="true" aria-labelledby="pop-t">
+  <div class="veu" data-fechar-pop></div>
+  <div class="caixa">
+    <button class="x" type="button" data-fechar-pop aria-label="Fechar">×</button>
+    <div class="faixa"><span class="luz"></span>Últimos números disponíveis</div>
+    <img class="arte" src="https://incs-bucket.s3.amazonaws.com/20261007_6ac6de54311fd.jpeg" alt="R$ 120.000,00 — 211ª edição">
+    <div class="corpo">
+      <h3 id="pop-t">Corre que <span>está acabando!</span></h3>
+      <p>Os números do R$ 120.000,00 estão quase esgotados. Garanta os seus antes que acabem.</p>
+      <div class="barra-v" data-vendido="87" aria-hidden="true"><span></span></div>
+      <div class="info-v"><span><b data-pct>87%</b> vendidos</span><span>Restam poucos!</span></div>
+      <p style="font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--texto)">O sorteio começa em</p>
+      <div class="relogio" data-relogio aria-label="Tempo até o próximo sorteio"><span class="u"><b data-d>00</b><small>DIAS</small></span><i>:</i><span class="u"><b data-h>00</b><small>HORAS</small></span><i>:</i><span class="u"><b data-m>00</b><small>MIN</small></span><i>:</i><span class="u"><b data-s>00</b><small>SEG</small></span></div>
+      <a class="btn-comprar" href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">Garantir meus números</a>
+      <button class="depois" type="button" data-fechar-pop>Agora não</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ================= WHATSAPP =================
+  EDITAR: troque o número em href (formato 55 + DDD + número, só dígitos) e a mensagem.
+-->
+<a class="zap" id="botaoZap" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20100zinho%20da%20Sorte." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3Zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4a10.4 10.4 0 0 1-1.7-5.7C5.1 10 10 5.3 16 5.3S26.9 10 26.9 15.8 22 26.4 16 26.4Zm6-7.8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5v-.6c0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.1 1.4 3.4c.2.2 2.4 3.6 5.7 5 .8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.5Z"/></svg>
+</a>
+
+<!-- ================= BARRA INFERIOR (mobile) ================= -->
+<nav class="barra" aria-label="Atalhos">
+  <button type="button" id="abrirMais">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/><path d="M17 3v8M13 7h8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+    Mais
+  </button>
+  <a href="https://www.100zinhodasorte.me/meus-numeros">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2.2a2.8 2.8 0 0 0 0 5.6V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2.2a2.8 2.8 0 0 0 0-5.6V7Zm6 1v2h2V8H9Zm0 3v2h2v-2H9Zm0 3v2h2v-2H9Z"/></svg>
+    Consultar
+  </a>
+  <a class="central" href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">
+    <span class="bola"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="4.2"/><circle cx="16" cy="8" r="4.2"/><circle cx="8" cy="16" r="4.2"/><circle cx="16" cy="16" r="4.2"/></svg></span>
+    Comprar
+  </a>
+  <a href="#ganhadores">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.3A5 5 0 0 1 13 14.9V17h3v4H8v-4h3v-2.1A5 5 0 0 1 8.3 12H8a4 4 0 0 1-4-4V5h3V3Zm0 4H6v1a2 2 0 0 0 1 1.7V7Zm10 0v2.7A2 2 0 0 0 18 8V7h-1Z"/></svg>
+    Ganhadores
+  </a>
+  <a href="https://www.100zinhodasorte.me/contato">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M11 10h2v8h-2zM12 6.2a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8Z" fill="#363e9b"/></svg>
+    Suporte
+  </a>
+</nav>
+
+<script>
+
+/* ---------- CONFIG ----------
+   EDITAR: data e hora do próximo sorteio (horário de Brasília/Recife).
+   Se a data passar, a contagem pula para o mesmo horário do dia seguinte. */
+const PROXIMO_SORTEIO='2026-10-09T19:00:00-03:00';
+
+/* ---------- Contagem regressiva (faixa do topo + popup) ---------- */
+(function(){
+  let alvo=new Date(PROXIMO_SORTEIO).getTime();
+  const p=n=>String(n).padStart(2,'0');
+  const rel=[...document.querySelectorAll('[data-relogio]')];
+  function tick(){
+    let now=Date.now();
+    while(alvo<=now) alvo+=86400000;
+    let t=Math.floor((alvo-now)/1000);
+    const d=Math.floor(t/86400);t%=86400;
+    const h=Math.floor(t/3600);t%=3600;
+    const m=Math.floor(t/60),s=t%60;
+    rel.forEach(r=>{r.querySelector('[data-d]').textContent=p(d);r.querySelector('[data-h]').textContent=p(h);r.querySelector('[data-m]').textContent=p(m);r.querySelector('[data-s]').textContent=p(s);});
+  }
+  tick();setInterval(tick,1000);
+})();
+
+/* ---------- Contador "em números" (sobe do zero ao aparecer) ---------- */
+(function(){
+  const fmt=n=>Math.round(n).toLocaleString('pt-BR');
+  const els=[...document.querySelectorAll('.num [data-alvo]')];
+  const reduz=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function anima(el){
+    const alvo=+el.dataset.alvo,pre=el.dataset.prefixo||'',suf=el.dataset.sufixo||'';
+    if(reduz){el.textContent=pre+fmt(alvo)+suf;return;}
+    const dur=1800,t0=performance.now();
+    (function f(t){const k=Math.min((t-t0)/dur,1),e=1-Math.pow(1-k,3);el.textContent=pre+fmt(alvo*e)+suf;if(k<1)requestAnimationFrame(f);})(t0);
+  }
+  if(!('IntersectionObserver' in window)) return;
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){anima(e.target);io.unobserve(e.target);}}),{threshold:.4});
+  els.forEach(el=>io.observe(el));
+})();
+
+/* ---------- Popup de entrada ---------- */
+(function(){
+  const pop=document.getElementById('popup');
+  let visto=false;try{visto=sessionStorage.getItem('cz_popup')==='1';}catch(e){}
+  if(visto) return;
+  const barra=pop.querySelector('.barra-v'),pct=+barra.dataset.vendido||0;
+  pop.querySelector('[data-pct]').textContent=pct+'%';
+  const fechar=()=>{pop.hidden=true;document.body.style.overflow='';try{sessionStorage.setItem('cz_popup','1');}catch(e){}};
+  pop.querySelectorAll('[data-fechar-pop]').forEach(b=>b.addEventListener('click',fechar));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!pop.hidden)fechar();});
+  setTimeout(()=>{
+    pop.hidden=false;document.body.style.overflow='hidden';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{barra.firstElementChild.style.width=pct+'%';}));
+    pop.querySelector('.x').focus({preventScroll:true});
+  },1200);
+})();
+
+/* ---------- Carrossel ---------- */
+(function(){
+  const box=document.getElementById('carrossel');
+  const slides=[...box.querySelectorAll('.slide')];
+  const pontos=box.querySelector('.pontos');
+  let i=0,timer;
+  slides.forEach((_,n)=>{
+    const b=document.createElement('button');
+    b.type='button';b.setAttribute('aria-label','Banner '+(n+1));
+    b.addEventListener('click',()=>{ir(n);reiniciar();});
+    pontos.appendChild(b);
+  });
+  function ir(n){
+    i=(n+slides.length)%slides.length;
+    slides.forEach((s,k)=>{s.classList.toggle('ativo',k===i);s.tabIndex=k===i?0:-1;});
+    [...pontos.children].forEach((p,k)=>p.classList.toggle('ativo',k===i));
+  }
+  function reiniciar(){clearInterval(timer);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)timer=setInterval(()=>ir(i+1),5000);}
+  box.querySelector('.ant').addEventListener('click',()=>{ir(i-1);reiniciar();});
+  box.querySelector('.prox').addEventListener('click',()=>{ir(i+1);reiniciar();});
+  // arrastar no celular
+  let x0=null;
+  box.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+  box.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){ir(i+(dx<0?1:-1));reiniciar();}x0=null;});
+  ir(0);reiniciar();
+})();
+
+/* ---------- Capas de vídeo (YouTube) ---------- */
+(function(){
+  const LOGO='https://incs-bucket.s3.amazonaws.com/20210308_60462ed7bfd0c.png';
+  document.querySelectorAll('.video').forEach(v=>{
+    const id=(v.dataset.youtube||'').trim();
+    const capa=document.createElement('button');
+    capa.type='button';capa.className='capa'+(id?'':' sem-video');
+    if(id){
+      capa.setAttribute('aria-label','Assistir vídeo do ganhador');
+      capa.innerHTML='<img class="thumb" src="https://i.ytimg.com/vi/'+id+'/hqdefault.jpg" alt=""><span class="play"></span>';
+      capa.addEventListener('click',()=>{
+        v.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0" title="Vídeo do ganhador" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+      });
+    }else{
+      capa.setAttribute('aria-label','Vídeo em breve');
+      capa.innerHTML='<img class="marca" src="'+LOGO+'" alt=""><span class="play"></span><span class="rotulo">Vídeo em breve</span>';
+    }
+    v.appendChild(capa);
+  });
+})();
+
+/* ---------- Menu lateral ---------- */
+(function(){
+  const g=document.getElementById('gaveta');
+  const abrir=()=>{g.hidden=false;document.body.style.overflow='hidden';};
+  const fechar=()=>{g.hidden=true;document.body.style.overflow='';};
+  document.getElementById('abrirMenu').addEventListener('click',abrir);
+  document.getElementById('abrirMais').addEventListener('click',abrir);
+  g.querySelectorAll('[data-fechar]').forEach(el=>el.addEventListener('click',fechar));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!g.hidden)fechar();});
+})();
+</script>
+</body>
+</html>
