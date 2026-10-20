@@ -910,7 +910,7 @@ function proximoSorteio(agora){
     if(e.target.closest('.capa:not(.sem-video)'))parado=true;},true);
   if('IntersectionObserver' in window){new IntersectionObserver(es=>{visivel=es[0].isIntersecting;},{threshold:.35}).observe(tr);}else visivel=true;
   let rt=0;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>ir(Math.max(0,idx),false),150);});
-  ir(0,false);marcar();
+  ir(Math.floor(n/2),false);marcar();
   if(!reduz)setInterval(()=>{if(parado||hover||!visivel||Date.now()<pausa||document.hidden)return;ir((idx+1)%n);},3200);
 })();
 
