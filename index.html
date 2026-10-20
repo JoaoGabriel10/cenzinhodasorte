@@ -92,8 +92,14 @@ h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;line-height:1.0
 .titulo p{color:var(--texto-suave);margin:10px auto 0;max-width:56ch}
 
 /* ===== GANHADORES (vídeos) ===== */
-.ganhadores{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.ganhador{display:flex;flex-direction:column;gap:14px;min-width:0}
+.ganhadores{--cw:440px;position:relative;display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-16px;padding:14px calc(50% + 16px - var(--cw)/2) 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.ganhadores::-webkit-scrollbar{display:none}
+.ganhador{flex:0 0 var(--cw);scroll-snap-align:center;display:flex;flex-direction:column;gap:14px;min-width:0;transform:scale(.84);opacity:.38;filter:saturate(.6) brightness(.7);transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .45s,filter .45s;cursor:pointer}
+.ganhador.ativo{transform:none;opacity:1;filter:none;cursor:default}
+.ganhador.ativo .video{box-shadow:0 0 0 2px var(--ouro),0 24px 50px -18px rgba(255,201,60,.45)}
+.g-pontos{display:flex;justify-content:center;gap:8px;margin-top:14px}
+.g-pontos button{width:9px;height:9px;border-radius:999px;border:0;padding:0;background:rgba(255,255,255,.3);cursor:pointer;transition:width .3s,background .3s}
+.g-pontos button.ativo{width:26px;background:var(--ouro)}
 .ganhador .quem{text-align:center}
 .ganhador .quem small{display:block;font-weight:800;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--texto-suave)}
 .ganhador .valor{display:block;font-family:var(--f-display);font-weight:900;font-style:italic;font-size:clamp(28px,3.4vw,38px);background:linear-gradient(180deg,#fff3b8 0%,var(--ouro) 45%,var(--ouro-escuro) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
@@ -367,9 +373,9 @@ section[id]{scroll-margin-top:96px}
   .diario .sub-d{margin:-4px 0 4px;font-size:14px}
   .esteira li{font-size:13px;padding-inline:14px}
   /* ganhadores: carrossel deslizante */
-  .ganhadores{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-16px;padding:0 16px 6px;scroll-padding-inline:16px;scrollbar-width:none}
-  .ganhadores::-webkit-scrollbar{display:none}
-  .ganhador{flex:0 0 84%;scroll-snap-align:start;gap:10px}
+  .ganhadores{--cw:68vw;gap:0;padding-top:8px}
+  .ganhador{gap:10px;transform:scale(.86)}
+  .ganhador.ativo{transform:none}
   .ganhador .quem small{font-size:12px}
   .ganhador .valor{font-size:26px}
   .ganhador .onde{font-size:12px}
@@ -873,6 +879,38 @@ function proximoSorteio(agora){
     }
     v.appendChild(capa);
   });
+})();
+
+/* ---------- Ganhadores: carrossel rolando (centro grande, lados em sombra) ---------- */
+(function(){
+  const tr=document.querySelector('.ganhadores');if(!tr)return;
+  const cards=[...tr.children],n=cards.length;
+  const pts=document.createElement('div');pts.className='g-pontos';
+  cards.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Ganhador '+(i+1));b.addEventListener('click',()=>{ir(i);pausar(8000);});pts.appendChild(b);});
+  tr.after(pts);
+  let idx=-1,pausa=0,parado=false,visivel=false,hover=false,raf=0;
+  const reduz=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const centro=k=>k.offsetLeft+k.offsetWidth/2;
+  function marcar(){
+    raf=0;const c=tr.scrollLeft+tr.clientWidth/2;let best=0,bd=1e9;
+    cards.forEach((k,i)=>{const d=Math.abs(centro(k)-c);if(d<bd){bd=d;best=i;}});
+    if(best===idx)return;idx=best;
+    cards.forEach((k,i)=>k.classList.toggle('ativo',i===idx));
+    [...pts.children].forEach((p,i)=>p.classList.toggle('ativo',i===idx));
+  }
+  function ir(i,suave=true){const k=cards[i];tr.scrollTo({left:centro(k)-tr.clientWidth/2,behavior:suave&&!reduz?'smooth':'auto'});}
+  function pausar(ms){pausa=Date.now()+ms;}
+  tr.addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(marcar);},{passive:true});
+  ['pointerdown','touchstart','wheel'].forEach(ev=>tr.addEventListener(ev,()=>pausar(7000),{passive:true}));
+  tr.addEventListener('mouseenter',()=>{hover=true;});tr.addEventListener('mouseleave',()=>{hover=false;pausar(2500);});
+  // clicar num card de lado traz ele pro centro; clicar no vídeo ativo para o carrossel
+  tr.addEventListener('click',e=>{const k=e.target.closest('.ganhador');if(!k)return;
+    if(!k.classList.contains('ativo')){e.preventDefault();e.stopPropagation();ir(cards.indexOf(k));pausar(8000);return;}
+    if(e.target.closest('.capa:not(.sem-video)'))parado=true;},true);
+  if('IntersectionObserver' in window){new IntersectionObserver(es=>{visivel=es[0].isIntersecting;},{threshold:.35}).observe(tr);}else visivel=true;
+  let rt=0;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>ir(Math.max(0,idx),false),150);});
+  ir(0,false);marcar();
+  if(!reduz)setInterval(()=>{if(parado||hover||!visivel||Date.now()<pausa||document.hidden)return;ir((idx+1)%n);},3200);
 })();
 
 /* ---------- Menu lateral ---------- */
