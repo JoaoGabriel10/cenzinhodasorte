@@ -300,6 +300,25 @@ section[id]{scroll-margin-top:96px}
   .barra .central .bola{width:58px;height:58px;margin-top:-30px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg,#2bd06f,var(--verde));border:3px solid var(--ouro);box-shadow:0 8px 18px rgba(0,0,0,.45)}
   .barra .central .bola svg{width:30px;height:30px}
 }
+/* ===== POPUP COMPACTO ===== */
+.pop{padding:12px}
+.pop .caixa{width:min(360px,100%);border-radius:18px}
+.pop .faixa{font-size:11px;padding:7px 40px;gap:6px}
+.pop .faixa .luz{width:7px;height:7px}
+.pop .x{top:4px;right:6px;width:28px;height:28px;font-size:18px;background:rgba(0,0,0,.35)}
+.pop .arte{aspect-ratio:2/1;object-position:center 45%}
+.pop .corpo{padding:14px 16px 14px;gap:9px}
+.pop h3{font-size:21px}
+.pop .barra-v{height:10px}
+.pop .info-v{font-size:12px;margin-top:-3px}
+.pop .corpo>.pop-rot{margin:2px 0 0;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--texto)}
+.pop .relogio .u{min-width:38px}
+.pop .relogio b{font-size:20px;min-width:38px;padding:4px 6px;border-radius:7px}
+.pop .relogio small{font-size:9px;margin-top:3px}
+.pop .relogio i{font-size:18px;line-height:30px}
+.pop .btn-comprar{font-size:16px;padding:13px 16px;box-shadow:0 5px 0 var(--verde-escuro);animation:none}
+.pop .depois{font-size:12px;margin-top:-2px}
+@media (max-width:820px){.pop .caixa{width:min(330px,100%)}.pop h3{font-size:19px}}
 </style>
 </head>
 <body>
@@ -580,10 +599,9 @@ section[id]{scroll-margin-top:96px}
     <img class="arte" src="https://incs-bucket.s3.amazonaws.com/20261007_6ac6de54311fd.jpeg" alt="R$ 120.000,00 — 211ª edição">
     <div class="corpo">
       <h3 id="pop-t">Corre que <span>está acabando!</span></h3>
-      <p>Os números do R$ 120.000,00 estão quase esgotados. Garanta os seus antes que acabem.</p>
       <div class="barra-v" data-vendido="87" aria-hidden="true"><span></span></div>
       <div class="info-v"><span><b data-pct>87%</b> vendidos</span><span>Restam poucos!</span></div>
-      <p style="font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--texto)">Próximo sorteio <span class="quando" data-quando>hoje</span> começa em</p>
+      <p class="pop-rot">Sorteio <span class="quando" data-quando>hoje</span></p>
       <div class="relogio" data-relogio aria-label="Tempo até o próximo sorteio"><span class="u"><b data-d>00</b><small>DIAS</small></span><i>:</i><span class="u"><b data-h>00</b><small>HORAS</small></span><i>:</i><span class="u"><b data-m>00</b><small>MIN</small></span><i>:</i><span class="u"><b data-s>00</b><small>SEG</small></span></div>
       <a class="btn-comprar" href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">Garantir meus números</a>
       <button class="depois" type="button" data-fechar-pop>Agora não</button>
