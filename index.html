@@ -12,7 +12,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('aguardando');setTimeout(function(){document.documentElement.classList.remove('aguardando')},2500);</script>
 <style>
+html.aguardando .carrossel .slide,html.aguardando [data-sorteio-principal],html.aguardando .extras,html.aguardando .pop .arte,html.aguardando .ganhadores,html.aguardando .esteira{opacity:0}
+.carrossel .slide,[data-sorteio-principal],.extras,.ganhadores,.esteira{transition:opacity .35s}
 /* Layout: mesma espinha da Família de Prêmios — header + carrossel de banners + COMPRAR + ganhadores em vídeo + banners extras + parceiro + FAQ + insta + rodapé; no mobile, barra de navegação fixa embaixo. Identidade 100zinho: azul-noite, azul royal, dourado do logo e verde do botão de compra. */
 :root{
   --noite:#080812;        /* fundo do site oficial */
@@ -460,7 +463,7 @@ section[id]{scroll-margin-top:96px}
   <div class="wrap">
     <span class="rot">Próximo sorteio <span class="quando" data-quando>hoje</span></span>
     <div class="relogio" data-relogio aria-label="Tempo até o próximo sorteio"><span class="u"><b data-d>00</b><small>DIAS</small></span><i>:</i><span class="u"><b data-h>00</b><small>HORAS</small></span><i>:</i><span class="u"><b data-m>00</b><small>MIN</small></span><i>:</i><span class="u"><b data-s>00</b><small>SEG</small></span></div>
-    <a class="ir" href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">Comprar</a>
+    <a class="ir" data-link-principal href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">Comprar</a>
   </div>
 </div>
 
@@ -492,13 +495,13 @@ section[id]{scroll-margin-top:96px}
 
   <!-- ================= COMPRAR ================= -->
   <section class="compra wrap" aria-label="Comprar">
-    <a class="btn-comprar" href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">
+    <a class="btn-comprar" data-link-principal href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2.2a2.8 2.8 0 0 0 0 5.6V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2.2a2.8 2.8 0 0 0 0-5.6V7Zm11 1v2h2V8h-2Zm0 3v2h2v-2h-2Zm0 3v2h2v-2h-2Z"/></svg>
       Comprar
     </a>
     <!-- EDITAR: data/hora do sorteio da campanha principal -->
-    <p class="sorteio">R$ 120.000,00 · <span>211ª edição</span></p>
-    <p class="sub">Sorteio pela Loteria Federal · pagamento via PIX</p>
+    <p class="sorteio" data-sorteio-principal>R$ 120.000,00 · <span>211ª edição</span></p>
+    <p class="sub" data-sub-principal>Sorteio pela Loteria Federal · pagamento via PIX</p>
     <a class="link-reg" href="https://www.100zinhodasorte.me/termos-de-uso">Regulamento</a>
   </section>
 </div>
@@ -711,7 +714,7 @@ section[id]{scroll-margin-top:96px}
       <div class="info-v"><span><b data-pct>87%</b> vendidos</span><span>Restam poucos!</span></div>
       <p class="pop-rot">Sorteio <span class="quando" data-quando>hoje</span></p>
       <div class="relogio" data-relogio aria-label="Tempo até o próximo sorteio"><span class="u"><b data-d>00</b><small>DIAS</small></span><i>:</i><span class="u"><b data-h>00</b><small>HORAS</small></span><i>:</i><span class="u"><b data-m>00</b><small>MIN</small></span><i>:</i><span class="u"><b data-s>00</b><small>SEG</small></span></div>
-      <a class="btn-comprar" href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">Garantir meus números</a>
+      <a class="btn-comprar" data-link-principal href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">Garantir meus números</a>
       <button class="depois" type="button" data-fechar-pop>Agora não</button>
     </div>
   </div>
@@ -735,7 +738,7 @@ section[id]{scroll-margin-top:96px}
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2.2a2.8 2.8 0 0 0 0 5.6V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2.2a2.8 2.8 0 0 0 0-5.6V7Zm6 1v2h2V8H9Zm0 3v2h2v-2H9Zm0 3v2h2v-2H9Z"/></svg>
     Consultar
   </a>
-  <a class="central" href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">
+  <a class="central" data-link-principal href="https://www.100zinhodasorte.me/campanha/r-120-000-00-sendo-r-60-000-00-pela-lot-federal-e-60k-de-cotas-premiadas-sorteio-211-edicao-16582">
     <span class="bola"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="4.2"/><circle cx="16" cy="8" r="4.2"/><circle cx="8" cy="16" r="4.2"/><circle cx="16" cy="16" r="4.2"/></svg></span>
     Comprar
   </a>
@@ -834,37 +837,40 @@ function proximoSorteio(agora){
   },1200);
 })();
 
-/* ---------- Carrossel ---------- */
-(function(){
+/* ---------- Carrossel de banners ---------- */
+const Carrossel=(function(){
   const box=document.getElementById('carrossel');
-  const slides=[...box.querySelectorAll('.slide')];
   const pontos=box.querySelector('.pontos');
-  let i=0,timer;
-  slides.forEach((_,n)=>{
-    const b=document.createElement('button');
-    b.type='button';b.setAttribute('aria-label','Banner '+(n+1));
-    b.addEventListener('click',()=>{ir(n);reiniciar();});
-    pontos.appendChild(b);
-  });
+  let slides=[],i=0,timer=null;
   function ir(n){
+    if(!slides.length)return;
     i=(n+slides.length)%slides.length;
     slides.forEach((s,k)=>{s.classList.toggle('ativo',k===i);s.tabIndex=k===i?0:-1;});
     [...pontos.children].forEach((p,k)=>p.classList.toggle('ativo',k===i));
   }
-  function reiniciar(){clearInterval(timer);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)timer=setInterval(()=>ir(i+1),5000);}
+  function reiniciar(){clearInterval(timer);if(slides.length>1&&!matchMedia('(prefers-reduced-motion: reduce)').matches)timer=setInterval(()=>ir(i+1),5000);}
+  function montar(){
+    slides=[...box.querySelectorAll('.slide')];
+    pontos.innerHTML='';
+    slides.forEach((_,n)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Banner '+(n+1));b.addEventListener('click',()=>{ir(n);reiniciar();});pontos.appendChild(b);});
+    pontos.hidden=slides.length<2;
+    i=0;ir(0);reiniciar();
+  }
   box.querySelector('.ant').addEventListener('click',()=>{ir(i-1);reiniciar();});
   box.querySelector('.prox').addEventListener('click',()=>{ir(i+1);reiniciar();});
   // arrastar no celular
   let x0=null;
   box.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
   box.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){ir(i+(dx<0?1:-1));reiniciar();}x0=null;});
-  ir(0);reiniciar();
+  montar();
+  return {montar};
 })();
 
 /* ---------- Capas de vídeo (YouTube) ---------- */
-(function(){
+function prepararVideos(){
   const LOGO='https://incs-bucket.s3.amazonaws.com/20210308_60462ed7bfd0c.png';
   document.querySelectorAll('.video').forEach(v=>{
+    if(v.dataset.pronto)return;v.dataset.pronto='1';
     const id=(v.dataset.youtube||'').trim();
     const capa=document.createElement('button');
     capa.type='button';capa.className='capa'+(id?'':' sem-video');
@@ -880,27 +886,33 @@ function proximoSorteio(agora){
     }
     v.appendChild(capa);
   });
-})();
+}
+prepararVideos();
 
 /* ---------- Ganhadores: carrossel rolando (centro grande, lados em sombra) ---------- */
-(function(){
-  const tr=document.querySelector('.ganhadores');if(!tr)return;
-  const cards=[...tr.children],n=cards.length;
-  const pts=document.createElement('div');pts.className='g-pontos';
-  cards.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Ganhador '+(i+1));b.addEventListener('click',()=>{ir(i);pausar(8000);});pts.appendChild(b);});
-  tr.after(pts);
-  let idx=-1,pausa=0,parado=false,visivel=false,hover=false,raf=0;
+const Ganh=(function(){
+  const tr=document.querySelector('.ganhadores');if(!tr)return {montar(){}};
+  let cards=[],n=0,pts=null,idx=-1,pausa=0,parado=false,visivel=false,hover=false,raf=0;
   const reduz=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const centro=k=>k.offsetLeft+k.offsetWidth/2;
   function marcar(){
-    raf=0;const c=tr.scrollLeft+tr.clientWidth/2;let best=0,bd=1e9;
+    raf=0;if(!n)return;const c=tr.scrollLeft+tr.clientWidth/2;let best=0,bd=1e9;
     cards.forEach((k,i)=>{const d=Math.abs(centro(k)-c);if(d<bd){bd=d;best=i;}});
     if(best===idx)return;idx=best;
     cards.forEach((k,i)=>k.classList.toggle('ativo',i===idx));
-    [...pts.children].forEach((p,i)=>p.classList.toggle('ativo',i===idx));
+    if(pts)[...pts.children].forEach((p,i)=>p.classList.toggle('ativo',i===idx));
   }
-  function ir(i,suave=true){const k=cards[i];tr.scrollTo({left:centro(k)-tr.clientWidth/2,behavior:suave&&!reduz?'smooth':'auto'});}
+  function ir(i,suave=true){const k=cards[i];if(!k)return;tr.scrollTo({left:centro(k)-tr.clientWidth/2,behavior:suave&&!reduz?'smooth':'auto'});}
   function pausar(ms){pausa=Date.now()+ms;}
+  function montar(){
+    cards=[...tr.children];n=cards.length;
+    if(pts)pts.remove();
+    pts=document.createElement('div');pts.className='g-pontos';
+    cards.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Ganhador '+(i+1));b.addEventListener('click',()=>{ir(i);pausar(8000);});pts.appendChild(b);});
+    tr.after(pts);
+    idx=-1;parado=false;
+    ir(Math.floor(n/2),false);marcar();
+  }
   tr.addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(marcar);},{passive:true});
   ['pointerdown','touchstart','wheel'].forEach(ev=>tr.addEventListener(ev,()=>pausar(7000),{passive:true}));
   tr.addEventListener('mouseenter',()=>{hover=true;});tr.addEventListener('mouseleave',()=>{hover=false;pausar(2500);});
@@ -910,8 +922,64 @@ function proximoSorteio(agora){
     if(e.target.closest('.capa:not(.sem-video)'))parado=true;},true);
   if('IntersectionObserver' in window){new IntersectionObserver(es=>{visivel=es[0].isIntersecting;},{threshold:.35}).observe(tr);}else visivel=true;
   let rt=0;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>ir(Math.max(0,idx),false),150);});
-  ir(Math.floor(n/2),false);marcar();
-  if(!reduz)setInterval(()=>{if(parado||hover||!visivel||Date.now()<pausa||document.hidden)return;ir((idx+1)%n);},3200);
+  if(!reduz)setInterval(()=>{if(!n||parado||hover||!visivel||Date.now()<pausa||document.hidden)return;ir((idx+1)%n);},3200);
+  montar();
+  return {montar};
+})();
+
+/* ---------- DADOS AO VIVO do site oficial (100zinhodasorte.me) ----------
+   A página busca /api/cenzinho, que lê o site oficial a cada ~5 min.
+   Campanhas (banners, link de compra, valor/edição, popup) e ganhadores
+   (esteira, cards e vídeo do YouTube cadastrado no ganhador) se atualizam sozinhos.
+   Se a busca falhar, fica o último conteúdo salvo neste aparelho ou o conteúdo fixo da página. */
+(function(){
+  const API='/api/cenzinho',KEY='cz_dados_v1';
+  const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const ytId=u=>{if(!u)return '';const s=String(u).trim();if(/^[\w-]{11}$/.test(s))return s;const m=s.match(/(?:v=|youtu\.be\/|shorts\/|embed\/|live\/)([\w-]{11})/);return m?m[1]:'';};
+  const dataBR=d=>{const m=String(d||'').match(/^(\d{4})-(\d{2})-(\d{2})/);return m?m[3]+'/'+m[2]:String(d||'').slice(0,5);};
+  let ultimo='';
+  function aplicar(d){
+    const C=(d.campanhas||[]).filter(c=>c&&c.img&&c.url);
+    const G=(d.ganhadores||[]).filter(g=>g&&g.nome&&g.premio);
+    if(C.length){
+      const p=C[0];
+      const box=document.getElementById('carrossel'),ant=box.querySelector('.seta.ant');
+      box.querySelectorAll('.slide').forEach(s=>s.remove());
+      C.slice(0,6).forEach((c,k)=>{const a=document.createElement('a');a.className='slide';a.href=c.url;
+        a.innerHTML='<img class="fundo" src="'+esc(c.img)+'" alt="" aria-hidden="true"><img class="arte" src="'+esc(c.img)+'" alt="'+esc(c.titulo)+'"'+(k?' loading="lazy"':'')+'>';
+        box.insertBefore(a,ant);});
+      Carrossel.montar();
+      document.querySelectorAll('[data-link-principal]').forEach(a=>{a.href=p.url;});
+      const so=document.querySelector('[data-sorteio-principal]');
+      if(so&&p.valor)so.innerHTML=esc(p.valor)+(p.edicao?' · <span>'+esc(p.edicao)+'ª edição</span>':'');
+      const sub=document.querySelector('[data-sub-principal]');
+      if(sub)sub.textContent=(p.federal?'Sorteio pela Loteria Federal · ':'')+'pagamento via PIX';
+      const pi=document.querySelector('.pop .arte');if(pi){pi.src=p.img;pi.alt=p.titulo;}
+      const ex=document.querySelector('.extras');const ou=C.slice(1,3);
+      if(ex&&ou.length)ex.innerHTML=ou.map(c=>'<a href="'+esc(c.url)+'"><img src="'+esc(c.img)+'" alt="'+esc(c.titulo)+'" loading="lazy"></a>').join('');
+    }
+    if(G.length){
+      const ul=document.querySelector('.esteira ul');
+      if(ul){const li=G.slice(0,10).map(g=>'<li><strong>'+esc(g.nome)+'</strong> ganhou <b>'+esc(g.premio)+'</b></li>').join('');ul.innerHTML=li+li.replace(/<li>/g,'<li aria-hidden="true">');}
+      const ord=[...G.filter(g=>ytId(g.youtube)),...G.filter(g=>!ytId(g.youtube))];const vis=new Set(),uni=ord.filter(g=>!vis.has(g.nome)&&vis.add(g.nome));const lista=[...uni,...ord.filter(g=>!uni.includes(g))].slice(0,4);
+      const tr=document.querySelector('.ganhadores');
+      if(tr){
+        tr.innerHTML=lista.map(g=>'<article class="ganhador"><div class="quem"><small>Ganhou</small><span class="valor">'+esc(g.premio)+'!</span><span class="onde">'+esc(g.nome)+(g.data?' · '+esc(dataBR(g.data)):'')+'</span></div><div class="video" data-youtube="'+esc(ytId(g.youtube))+'"></div></article>').join('');
+        prepararVideos();Ganh.montar();
+      }
+    }
+    document.documentElement.classList.remove('aguardando');
+  }
+  function usar(d,salvar){
+    if(!d||!((d.campanhas&&d.campanhas.length)||(d.ganhadores&&d.ganhadores.length)))return;
+    const k=JSON.stringify({c:d.campanhas,g:d.ganhadores});if(k===ultimo)return;ultimo=k;
+    try{aplicar(d);}catch(e){document.documentElement.classList.remove('aguardando');}
+    if(salvar){try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}}
+  }
+  try{usar(JSON.parse(localStorage.getItem(KEY)||'null'),false);}catch(e){}
+  function buscar(){fetch(API,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>usar(d,true)).catch(()=>{});}
+  if(location.protocol!=='file:')buscar();
+  setInterval(()=>{if(!document.hidden&&location.protocol!=='file:')buscar();},300000);
 })();
 
 /* ---------- Menu lateral ---------- */
