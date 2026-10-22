@@ -16,7 +16,7 @@
 <style>
 html.aguardando .carrossel .slide,html.aguardando [data-sorteio-principal],html.aguardando .extras,html.aguardando .pop .arte,html.aguardando .ganhadores,html.aguardando .esteira{opacity:0}
 .carrossel .slide,[data-sorteio-principal],.extras,.ganhadores,.esteira{transition:opacity .35s}
-/* Layout: mesma espinha da Família de Prêmios — header + carrossel de banners + COMPRAR + ganhadores em vídeo + banners extras + parceiro + FAQ + insta + rodapé; no mobile, barra de navegação fixa embaixo. Identidade 100zinho: azul-noite, azul royal, dourado do logo e verde do botão de compra. */
+/* Layout: mesma espinha da Família de Prêmios — header + carrossel de banners + COMPRAR + ganhadores em vídeo + banners extras + parceiro + FAQ + rodapé; no mobile, barra de navegação fixa embaixo. Identidade 100zinho: azul-noite, azul royal, dourado do logo e verde do botão de compra. */
 :root{
   --noite:#080812;        /* fundo do site oficial */
   --noite-2:#0f1030;      /* superfícies */
@@ -151,15 +151,6 @@ h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;line-height:1.0
 .faq details p{margin:0;padding:0 22px 20px;color:var(--texto-suave)}
 .faq details p a{color:var(--ouro);font-weight:700}
 
-/* ===== INSTAGRAM ===== */
-.insta{display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
-.insta h2{font-weight:900;font-style:italic;font-size:clamp(30px,5vw,48px);text-transform:uppercase}
-.insta h2 span{background:linear-gradient(90deg,#feda75,#fa7e1e,#d62976,#962fbf);-webkit-background-clip:text;background-clip:text;color:transparent}
-.insta .perfil{display:flex;align-items:center;gap:16px;padding:16px 20px;border-radius:999px;background:var(--noite-2);border:1px solid var(--linha);text-decoration:none;max-width:100%}
-.insta .perfil img{width:56px;height:56px;border-radius:50%;background:#fff;object-fit:contain;flex-shrink:0}
-.insta .perfil strong{display:block;font-size:17px}
-.insta .perfil small{color:var(--texto-suave)}
-.btn-insta{display:inline-flex;align-items:center;gap:10px;padding:15px 34px;border-radius:999px;background:linear-gradient(90deg,#fa7e1e,#d62976,#962fbf);color:#fff;font-weight:900;letter-spacing:.08em;text-transform:uppercase;text-decoration:none}
 
 /* ===== RODAPÉ ===== */
 .rodape{background:#05050d;border-top:1px solid var(--linha);padding-block:48px 32px}
@@ -181,7 +172,7 @@ h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;line-height:1.0
 .gaveta[hidden]{display:none}
 .gaveta .veu{position:absolute;inset:0;background:rgba(0,0,0,.6)}
 .gaveta nav{position:relative;width:min(320px,86vw);height:100%;background:var(--noite-2);padding:calc(24px + env(safe-area-inset-top,0px)) 20px 24px;display:flex;flex-direction:column;gap:6px;overflow-y:auto;box-shadow:20px 0 40px rgba(0,0,0,.5)}
-.gaveta nav img{height:52px;width:auto;margin-bottom:18px}
+.gaveta nav img{height:38px;width:auto;align-self:flex-start;object-fit:contain;margin:4px 0 16px 10px}
 .gaveta nav a{padding:14px 12px;border-radius:12px;text-decoration:none;font-weight:700}
 .gaveta nav a:hover{background:rgba(85,96,216,.25)}
 .gaveta .fechar{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:14px;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}
@@ -433,14 +424,6 @@ section[id]{scroll-margin-top:96px}
   .faq summary{padding:15px 50px 15px 16px;font-size:14px;line-height:1.3}
   .faq summary::after{right:14px;width:24px;height:24px;font-size:17px}
   .faq details p{padding:0 16px 15px;font-size:14px}
-  /* insta */
-  .insta{gap:14px}
-  .insta h2{font-size:26px}
-  .insta .perfil{padding:10px 18px 10px 10px;gap:12px}
-  .insta .perfil img{width:44px;height:44px}
-  .insta .perfil strong{font-size:15px}
-  .insta .perfil small{font-size:12px;line-height:1.3;display:block}
-  .btn-insta{padding:12px 28px;font-size:14px}
   /* rodapé */
   .rodape{padding-block:32px 24px}
   .rod-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 16px}
@@ -467,8 +450,34 @@ section[id]{scroll-margin-top:96px}
   .btn-zap{width:100%;padding:14px 18px;font-size:14px}
 }
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1869793387549476');
+fbq('track', 'PageView');
+</script>
+<!-- End Meta Pixel Code -->
+<script>
+/* Eventos do Pixel: clique para comprar (banners, Comprar, popup) = InitiateCheckout; WhatsApp/Comunidade = Contact */
+document.addEventListener('click',function(e){
+  var a=e.target.closest&&e.target.closest('a[href]');if(!a||typeof fbq!=='function')return;
+  var h=a.href||'';
+  if(/chat\.whatsapp\.com|wa\.me|api\.whatsapp/i.test(h)){fbq('track','Contact',{content_name:'Comunidade WhatsApp'});}
+  else if(/100zinhodasorte\.me\/(ref|campanha)/i.test(h)){fbq('track','InitiateCheckout',{content_name:a.getAttribute('aria-label')||(a.querySelector('img')||{}).alt||(a.textContent||'').trim().slice(0,60)||'Comprar',currency:'BRL'});}
+},true);
+</script>
 </head>
 <body>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=1869793387549476&ev=PageView&noscript=1"
+/></noscript>
 
 <!-- ================= HEADER ================= -->
 <header class="topo">
@@ -668,18 +677,6 @@ section[id]{scroll-margin-top:96px}
   </div>
 </section>
 
-<!-- ================= INSTAGRAM ================= -->
-<!-- DESATIVADO por ora (pedido 20/10). Para reativar: remover o atributo hidden -->
-<section class="secao" style="padding-top:0" aria-label="Instagram" hidden>
-  <div class="wrap insta">
-    <h2>Segue lá no <span>Insta!</span></h2>
-    <a class="perfil" href="https://www.instagram.com/cenzinhodasorte" target="_blank" rel="noopener">
-      <img src="https://incs-bucket.s3.amazonaws.com/20210518_60a4112b59747.png" alt="" width="56" height="56">
-      <span style="text-align:left"><strong>@cenzinhodasorte</strong><small>Resultados, ganhadores e novidades</small></span>
-    </a>
-    <a class="btn-insta" href="https://www.instagram.com/cenzinhodasorte" target="_blank" rel="noopener">Seguir</a>
-  </div>
-</section>
 </main>
 
 <!-- ================= RODAPÉ ================= -->
@@ -694,7 +691,6 @@ section[id]{scroll-margin-top:96px}
         <h4>Contato</h4>
         <ul>
           <li><a href="https://www.100zinhodasorte.me/contato">Suporte</a></li>
-          <li><a href="https://www.instagram.com/cenzinhodasorte" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://www.100zinhodasorte.me/comunicados">Avisos oficiais</a></li>
         </ul>
       </div>
@@ -731,7 +727,6 @@ section[id]{scroll-margin-top:96px}
     <a href="https://www.100zinhodasorte.me/termos-de-uso">Regulamento</a>
     <a href="#comunidade" data-fechar>Comunidade do WhatsApp</a>
     <a href="https://www.100zinhodasorte.me/contato">Fale Conosco</a>
-    <a href="https://www.instagram.com/cenzinhodasorte" target="_blank" rel="noopener">Instagram</a>
   </nav>
 </div>
 
