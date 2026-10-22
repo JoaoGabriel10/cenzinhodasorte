@@ -932,12 +932,22 @@ const Ganh=(function(){
   function marcar(){
     raf=0;if(!n)return;const c=tr.scrollLeft+tr.clientWidth/2;let best=0,bd=1e9;
     cards.forEach((k,i)=>{const d=Math.abs(centro(k)-c);if(d<bd){bd=d;best=i;}});
-    if(best===idx)return;idx=best;
+    if(best===idx)return;
+    if(idx!==-1){pausarVideos();parado=false;}
+    idx=best;
     cards.forEach((k,i)=>k.classList.toggle('ativo',i===idx));
     if(pts)[...pts.children].forEach((p,i)=>p.classList.toggle('ativo',i===idx));
   }
   function ir(i,suave=true){const k=cards[i];if(!k)return;tr.scrollTo({left:centro(k)-tr.clientWidth/2,behavior:suave&&!reduz?'smooth':'auto'});}
   function pausar(ms){pausa=Date.now()+ms;}
+  // pausa vídeo próprio e fecha player do YouTube (volta para a capa)
+  function pausarVideos(){
+    tr.querySelectorAll('video').forEach(v=>{try{v.pause();}catch(e){}});
+    tr.querySelectorAll('.video iframe').forEach(f=>{const box=f.parentElement;box.innerHTML='';delete box.dataset.pronto;});
+    prepararVideos();
+  }
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)pausarVideos();});
+  addEventListener('pagehide',pausarVideos);
   function montar(){
     cards=[...tr.children];n=cards.length;
     if(pts)pts.remove();
@@ -954,7 +964,7 @@ const Ganh=(function(){
   tr.addEventListener('click',e=>{const k=e.target.closest('.ganhador');if(!k)return;
     if(!k.classList.contains('ativo')){e.preventDefault();e.stopPropagation();ir(cards.indexOf(k));pausar(8000);return;}
     if(e.target.closest('.capa:not(.sem-video)'))parado=true;},true);
-  if('IntersectionObserver' in window){new IntersectionObserver(es=>{visivel=es[0].isIntersecting;},{threshold:.35}).observe(tr);}else visivel=true;
+  if('IntersectionObserver' in window){new IntersectionObserver(es=>{visivel=es[0].isIntersecting;if(!visivel)pausarVideos();},{threshold:.35}).observe(tr);}else visivel=true;
   let rt=0;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>ir(Math.max(0,idx),false),150);});
   if(!reduz)setInterval(()=>{if(!n||parado||hover||!visivel||Date.now()<pausa||document.hidden)return;ir((idx+1)%n);},3200);
   montar();
