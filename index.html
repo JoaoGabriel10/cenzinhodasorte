@@ -273,6 +273,18 @@ section[id]{scroll-margin-top:96px}
 .zap::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25d366;animation:onda 2s ease-out infinite}
 @keyframes onda{to{transform:scale(1.6);opacity:0}}
 
+/* ===== COMUNIDADE WHATSAPP ===== */
+.comunidade{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px;padding:24px 28px;border-radius:20px;background:var(--noite-2);border:1px solid rgba(37,211,102,.45);box-shadow:0 18px 40px -24px rgba(37,211,102,.5)}
+.com-ico{width:62px;height:62px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;flex-shrink:0}
+.com-ico svg{width:34px;height:34px}
+.com-txt{min-width:0}
+.com-txt h2{font-weight:900;font-style:italic;font-size:clamp(22px,3vw,30px);text-transform:uppercase}
+.com-txt h2 em{font-style:italic;color:#25d366}
+.com-txt p{margin:6px 0 0;color:var(--texto-suave)}
+.btn-zap{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 26px;border-radius:999px;background:#25d366;color:#fff;font-weight:900;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;white-space:nowrap;box-shadow:0 5px 0 #1a9e4c;transition:transform .15s}
+.btn-zap:hover{transform:translateY(-2px)}
+.btn-zap svg{width:22px;height:22px}
+
 /* ===== RESPONSIVO ===== */
 @media (max-width:1024px){
   .menu{display:none}
@@ -436,6 +448,12 @@ section[id]{scroll-margin-top:96px}
   .barra .central .bola{width:52px;height:52px;margin-top:-26px}
   .zap{width:50px;height:50px;right:12px}
   .zap svg{width:27px;height:27px}
+  .comunidade{grid-template-columns:1fr;justify-items:center;text-align:center;gap:12px;padding:22px 16px}
+  .com-ico{width:52px;height:52px}
+  .com-ico svg{width:28px;height:28px}
+  .com-txt h2{font-size:22px}
+  .com-txt p{font-size:14px}
+  .btn-zap{width:100%;padding:14px 18px;font-size:14px}
 }
 </style>
 </head>
@@ -457,6 +475,7 @@ section[id]{scroll-margin-top:96px}
         <li><a href="#ganhadores">Ganhadores</a></li>
         <li><a href="https://www.100zinhodasorte.me/comunicados">Avisos oficiais</a></li>
         <li><a href="https://www.100zinhodasorte.me/termos-de-uso">Regulamento</a></li>
+        <li><a href="#comunidade">Comunidade</a></li>
         <li><a href="https://www.100zinhodasorte.me/contato">Fale Conosco</a></li>
       </ul>
     </nav>
@@ -592,6 +611,20 @@ section[id]{scroll-margin-top:96px}
   </div>
 </section>
 
+<!-- ================= COMUNIDADE WHATSAPP ================= -->
+<section class="secao" id="comunidade" style="padding-top:0" aria-labelledby="t-comunidade">
+  <div class="wrap">
+    <div class="comunidade">
+      <span class="com-ico"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3Zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4a10.4 10.4 0 0 1-1.7-5.7C5.1 10 10 5.3 16 5.3S26.9 10 26.9 15.8 22 26.4 16 26.4Zm6-7.8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5v-.6c0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.1 1.4 3.4c.2.2 2.4 3.6 5.7 5 .8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.5Z"/></svg></span>
+      <div class="com-txt">
+        <h2 id="t-comunidade">Entre na <em>Comunidade</em> 100zinho</h2>
+        <p>Resultados, ganhadores e campanhas novas direto no seu WhatsApp, antes de todo mundo.</p>
+      </div>
+      <a class="btn-zap" href="https://chat.whatsapp.com/C6n99lnfoVS2NFWRQbnq5g" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3Zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4a10.4 10.4 0 0 1-1.7-5.7C5.1 10 10 5.3 16 5.3S26.9 10 26.9 15.8 22 26.4 16 26.4Zm6-7.8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5v-.6c0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.1 1.4 3.4c.2.2 2.4 3.6 5.7 5 .8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.5Z"/></svg>Entrar na comunidade</a>
+    </div>
+  </div>
+</section>
+
 <!-- ================= FAQ ================= -->
 <section class="secao" style="padding-top:0" aria-labelledby="t-faq">
   <div class="wrap">
@@ -685,6 +718,7 @@ section[id]{scroll-margin-top:96px}
     <a href="#ganhadores" data-fechar>Ganhadores</a>
     <a href="https://www.100zinhodasorte.me/comunicados">Avisos oficiais</a>
     <a href="https://www.100zinhodasorte.me/termos-de-uso">Regulamento</a>
+    <a href="#comunidade" data-fechar>Comunidade do WhatsApp</a>
     <a href="https://www.100zinhodasorte.me/contato">Fale Conosco</a>
     <a href="https://www.instagram.com/cenzinhodasorte" target="_blank" rel="noopener">Instagram</a>
   </nav>
@@ -713,10 +747,10 @@ section[id]{scroll-margin-top:96px}
 </div>
 
 
-<!-- ================= WHATSAPP =================
-  EDITAR: troque o número em href (formato 55 + DDD + número, só dígitos) e a mensagem.
+<!-- ================= WHATSAPP (Comunidade) =================
+  EDITAR: link da comunidade do WhatsApp.
 -->
-<a class="zap" id="botaoZap" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20100zinho%20da%20Sorte." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+<a class="zap" id="botaoZap" href="https://chat.whatsapp.com/C6n99lnfoVS2NFWRQbnq5g" target="_blank" rel="noopener" aria-label="Entrar na Comunidade do WhatsApp">
   <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3Zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4a10.4 10.4 0 0 1-1.7-5.7C5.1 10 10 5.3 16 5.3S26.9 10 26.9 15.8 22 26.4 16 26.4Zm6-7.8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5v-.6c0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.1 1.4 3.4c.2.2 2.4 3.6 5.7 5 .8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.5Z"/></svg>
 </a>
 
