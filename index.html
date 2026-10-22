@@ -585,10 +585,10 @@ section[id]{scroll-margin-top:96px}
       <article class="ganhador">
         <div class="quem">
           <small>Ele ganhou</small>
-          <span class="valor">R$ 800,00!</span>
-          <span class="onde">Adalberto Gomes · Ceará</span>
+          <span class="valor">R$ 60.000,00!</span>
+          <span class="onde">Cláudio Santos · 16/09</span>
         </div>
-        <div class="video" data-youtube=""></div>
+        <div class="video" data-mp4="/videos/claudio-16-09.mp4" data-poster="/videos/claudio-16-09.jpg"></div>
       </article>
     </div>
   </div>
@@ -975,7 +975,8 @@ const Ganh=(function(){
   const dataBR=d=>{const m=String(d||'').match(/^(\d{4})-(\d{2})-(\d{2})/);return m?m[3]+'/'+m[2]:String(d||'').slice(0,5);};
   /* EDITAR: ganhadores com vídeo próprio (ficam fixos no centro do carrossel) */
   const FIXOS=[
-    {rotulo:'Ela ganhou',premio:'R$ 60.000,00',nome:'Monique da Silva',data:'14/10',mp4:'/videos/monique-14-10.mp4',poster:'/videos/monique-14-10.jpg'}
+    {rotulo:'Ela ganhou',premio:'R$ 60.000,00',nome:'Monique da Silva',data:'14/10',mp4:'/videos/monique-14-10.mp4',poster:'/videos/monique-14-10.jpg'},
+    {rotulo:'Ele ganhou',premio:'R$ 60.000,00',nome:'Cláudio Santos',data:'16/09',mp4:'/videos/claudio-16-09.mp4',poster:'/videos/claudio-16-09.jpg'}
   ];
   const card=g=>'<article class="ganhador"><div class="quem"><small>'+esc(g.rotulo||'Ganhou')+'</small><span class="valor">'+esc(g.premio)+'!</span><span class="onde">'+esc(g.nome)+(g.data?' · '+esc(/^\d{4}-/.test(g.data)?dataBR(g.data):g.data):'')+'</span></div><div class="video"'+(g.mp4?' data-mp4="'+esc(g.mp4)+'"'+(g.poster?' data-poster="'+esc(g.poster)+'"':''):' data-youtube="'+esc(ytId(g.youtube))+'"')+'></div></article>';
   let ultimo='';
