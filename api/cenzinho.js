@@ -1,5 +1,5 @@
 // Lê a página oficial do 100zinho da Sorte e devolve campanhas e ganhadores em JSON.
-// A Vercel guarda a resposta por 5 minutos (s-maxage) e serve a última boa enquanto atualiza.
+// A Vercel guarda a resposta por 1 minuto; campanha que sai do ar some da LP em poucos minutos.
 const ORIGEM = 'https://www.100zinhodasorte.me/';
 
 const original = (u) => {
@@ -56,7 +56,7 @@ module.exports = async (req, res) => {
       .filter((g) => g.nome);
 
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
-    res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=86400');
+    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=120');
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.status(200).send(JSON.stringify({ atualizado: new Date().toISOString(), campanhas, ganhadores }));
   } catch (e) {
