@@ -450,6 +450,12 @@ section[id]{scroll-margin-top:96px}
   .btn-zap{width:100%;padding:14px 18px;font-size:14px}
 }
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1Q78EJZXHQ"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-1Q78EJZXHQ');
+</script>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -465,12 +471,18 @@ fbq('track', 'PageView');
 </script>
 <!-- End Meta Pixel Code -->
 <script>
-/* Eventos do Pixel: clique para comprar (banners, Comprar, popup) = InitiateCheckout; WhatsApp/Comunidade = Contact */
+/* Eventos (Pixel + Google Analytics): clique para comprar (banners, Comprar, popup) = InitiateCheckout; WhatsApp/Comunidade = Contact */
 document.addEventListener('click',function(e){
-  var a=e.target.closest&&e.target.closest('a[href]');if(!a||typeof fbq!=='function')return;
-  var h=a.href||'';
-  if(/chat\.whatsapp\.com|wa\.me|api\.whatsapp/i.test(h)){fbq('track','Contact',{content_name:'Comunidade WhatsApp'});}
-  else if(/100zinhodasorte\.me\/(ref|campanha)/i.test(h)){fbq('track','InitiateCheckout',{content_name:a.getAttribute('aria-label')||(a.querySelector('img')||{}).alt||(a.textContent||'').trim().slice(0,60)||'Comprar',currency:'BRL'});}
+  var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;
+  var h=a.href||'',fb=typeof fbq==='function',ga=typeof gtag==='function';
+  if(/chat\.whatsapp\.com|wa\.me|api\.whatsapp/i.test(h)){
+    if(fb)fbq('track','Contact',{content_name:'Comunidade WhatsApp'});
+    if(ga)gtag('event','clique_whatsapp',{link_url:h,transport_type:'beacon'});
+  }else if(/100zinhodasorte\.me\/(ref|campanha)/i.test(h)){
+    var nome=a.getAttribute('aria-label')||(a.querySelector('img')||{}).alt||(a.textContent||'').trim().slice(0,60)||'Comprar';
+    if(fb)fbq('track','InitiateCheckout',{content_name:nome,currency:'BRL'});
+    if(ga)gtag('event','clique_comprar',{item_name:nome,link_url:h,transport_type:'beacon'});
+  }
 },true);
 </script>
 </head>
