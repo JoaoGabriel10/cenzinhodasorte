@@ -285,6 +285,17 @@ section[id]{scroll-margin-top:96px}
 .btn-zap:hover{transform:translateY(-2px)}
 .btn-zap svg{width:22px;height:22px}
 
+/* ===== MENU EM UMA LINHA ===== */
+.menu a,.btn-titulos{white-space:nowrap}
+.topo nav{min-width:0}
+@media (min-width:1025px) and (max-width:1380px){
+  .topo .wrap{gap:12px}
+  .logo img{height:48px}
+  .menu{gap:0}
+  .menu a{padding:8px 10px;font-size:14px}
+  .btn-titulos{padding:10px 16px;font-size:13px}
+}
+
 /* ===== RESPONSIVO ===== */
 @media (max-width:1024px){
   .menu{display:none}
@@ -574,7 +585,7 @@ section[id]{scroll-margin-top:96px}
         </div>
         <div class="video" data-mp4="/videos/luziana-23-09.mp4" data-poster="/videos/luziana-23-09.jpg"></div>
       </article>
-      <article class="ganhador">
+      <article class="ganhador" data-inicio>
         <div class="quem">
           <small>Ela ganhou</small>
           <span class="valor">R$ 60.000,00!</span>
@@ -955,7 +966,8 @@ const Ganh=(function(){
     cards.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Ganhador '+(i+1));b.addEventListener('click',()=>{ir(i);pausar(8000);});pts.appendChild(b);});
     tr.after(pts);
     idx=-1;parado=false;
-    ir(Math.floor(n/2),false);marcar();
+    const ini=cards.findIndex(k=>k.hasAttribute('data-inicio'));
+    ir(ini>=0?ini:Math.floor(n/2),false);marcar();
   }
   tr.addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(marcar);},{passive:true});
   ['pointerdown','touchstart','wheel'].forEach(ev=>tr.addEventListener(ev,()=>pausar(7000),{passive:true}));
@@ -985,11 +997,11 @@ const Ganh=(function(){
   const dataBR=d=>{const m=String(d||'').match(/^(\d{4})-(\d{2})-(\d{2})/);return m?m[3]+'/'+m[2]:String(d||'').slice(0,5);};
   /* EDITAR: ganhadores com vídeo próprio (ficam fixos no centro do carrossel) */
   const FIXOS=[
-    {rotulo:'Ela ganhou',premio:'R$ 60.000,00',nome:'Monique da Silva',data:'14/10',mp4:'/videos/monique-14-10.mp4',poster:'/videos/monique-14-10.jpg'},
     {rotulo:'Ele ganhou',premio:'R$ 60.000,00',nome:'Cláudio Santos',data:'16/09',mp4:'/videos/claudio-16-09.mp4',poster:'/videos/claudio-16-09.jpg'},
+    {rotulo:'Ela ganhou',premio:'R$ 60.000,00',nome:'Monique da Silva',data:'14/10',inicio:true,mp4:'/videos/monique-14-10.mp4',poster:'/videos/monique-14-10.jpg'},
     {rotulo:'Ela ganhou',premio:'R$ 50.000,00',nome:'Luziana Ferreira',data:'23/09',mp4:'/videos/luziana-23-09.mp4',poster:'/videos/luziana-23-09.jpg'}
   ];
-  const card=g=>'<article class="ganhador"><div class="quem"><small>'+esc(g.rotulo||'Ganhou')+'</small><span class="valor">'+esc(g.premio)+'!</span><span class="onde">'+esc(g.nome)+(g.data?' · '+esc(/^\d{4}-/.test(g.data)?dataBR(g.data):g.data):'')+'</span></div><div class="video"'+(g.mp4?' data-mp4="'+esc(g.mp4)+'"'+(g.poster?' data-poster="'+esc(g.poster)+'"':''):' data-youtube="'+esc(ytId(g.youtube))+'"')+'></div></article>';
+  const card=g=>'<article class="ganhador"'+(g.inicio?' data-inicio':'')+'><div class="quem"><small>'+esc(g.rotulo||'Ganhou')+'</small><span class="valor">'+esc(g.premio)+'!</span><span class="onde">'+esc(g.nome)+(g.data?' · '+esc(/^\d{4}-/.test(g.data)?dataBR(g.data):g.data):'')+'</span></div><div class="video"'+(g.mp4?' data-mp4="'+esc(g.mp4)+'"'+(g.poster?' data-poster="'+esc(g.poster)+'"':''):' data-youtube="'+esc(ytId(g.youtube))+'"')+'></div></article>';
   let ultimo='';
   function aplicar(d){
     const C=(d.campanhas||[]).filter(c=>c&&c.img&&c.url);
@@ -1028,7 +1040,8 @@ const Ganh=(function(){
     if(G.length){
       const ul=document.querySelector('.esteira ul');
       if(ul){const li=G.slice(0,10).map(g=>'<li><strong>'+esc(g.nome)+'</strong> ganhou <b>'+esc(g.premio)+'</b></li>').join('');ul.innerHTML=li+li.replace(/<li>/g,'<li aria-hidden="true">');}
-      const ord=[...G.filter(g=>ytId(g.youtube)),...G.filter(g=>!ytId(g.youtube))];const vis=new Set(),uni=ord.filter(g=>!vis.has(g.nome)&&vis.add(g.nome));const lista=[...uni,...ord.filter(g=>!uni.includes(g))].slice(0,4);const meio=Math.floor((lista.length+FIXOS.length)/2);lista.splice(meio,0,...FIXOS);
+      // só ganhadores com vídeo: os fixos + os do site oficial que tiverem YouTube cadastrado
+      const comVideo=G.filter(g=>ytId(g.youtube)).slice(0,4);const lista=[...comVideo,...FIXOS];
       const tr=document.querySelector('.ganhadores');
       if(tr){
         tr.innerHTML=lista.map(card).join('');
