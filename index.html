@@ -947,6 +947,9 @@ const Ganh=(function(){
   let ultimo='';
   function aplicar(d){
     const C=(d.campanhas||[]).filter(c=>c&&c.img&&c.url);
+    // prêmio principal = campanha de maior valor (vai para popup, 1º banner e COMPRAR)
+    const num=v=>Number(String(v||'').replace(/[^\d,]/g,'').replace(',','.'))||0;
+    if(C.length>1){let iM=0;C.forEach((c,i)=>{if(num(c.valor)>num(C[iM].valor))iM=i;});if(iM)C.unshift(C.splice(iM,1)[0]);}
     const G=(d.ganhadores||[]).filter(g=>g&&g.nome&&g.premio);
     const temLista=Array.isArray(d.campanhas);
     const secB=document.querySelector('[data-secao-banners]'),secE=document.querySelector('[data-secao-extras]');
