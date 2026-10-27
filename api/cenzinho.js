@@ -42,8 +42,8 @@ module.exports = async (req, res) => {
         edicao: edicao(s.title),
         federal: /federal/i.test(s.title || ''),
       }))
-      // REGRA: só entram as campanhas com o selo "Adquira já!" no site oficial
-      .filter((c) => c.img && c.url && /adquira\s*j[aá]/i.test(c.status));
+      // REGRA: só entram campanhas à venda (selo "Adquira já!" ou "Corre que está acabando!")
+      .filter((c) => c.img && c.url && /adquira\s*j[aá]|corre\s*que|acabando/i.test(c.status));
 
     const ganhadores = (pp.ganhadores || [])
       .map((g) => ({
